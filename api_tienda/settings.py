@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+from decouple import config,Csv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p+o44m@4&@@#(qfeh-ecm1ls%d1puc4kn&pr-ydgbb41-f0l&a'
+SECRET_KEY = config('SECRET_KEY')
+ALLOWED_HOSTS= config('ALLOWED_HOSTS',cast=Csv())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,11 +95,11 @@ WSGI_APPLICATION = 'api_tienda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
-        'NAME': 'DB_tienda_parcial_api',
-        'USER': 'postgres',
-        'PASSWORD': '6305913',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST', default='localhost'),
+        'PORT': config('DATABASE_PORT',default='5432')
     }
 }
 
