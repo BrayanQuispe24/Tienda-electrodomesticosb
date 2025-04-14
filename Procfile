@@ -1,1 +1,1 @@
-web: gunicorn api_tienda.wsgi
+web: gunicorn api_tienda.wsgi:application
